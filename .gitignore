@@ -13,6 +13,7 @@ pubspec.lock
 
 # Android/IntelliJ
 android/.gradle/
+android/.kotlin/
 android/local.properties
 android/**/GeneratedPluginRegistrant.java
 android/.idea/
@@ -27,4 +28,3 @@ ios/Flutter/ephemeral/
 
 # macOS/Linux
 *.log
-
