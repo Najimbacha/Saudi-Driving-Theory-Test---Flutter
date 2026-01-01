@@ -1445,6 +1445,7 @@
     "filterInProgress": "In Progress",
     "filterCompleted": "Completed",
     "totalQuestions": "{{value}} questions",
+    "empty": "No questions available in this category yet",
     "signs": {
       "title": "Traffic Signs & Signals",
       "subtitle": "Learn signs and signals"

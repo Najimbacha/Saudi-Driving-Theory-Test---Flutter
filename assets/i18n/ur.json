@@ -1419,6 +1419,7 @@
     "filterInProgress": "جاری",
     "filterCompleted": "مکمل",
     "totalQuestions": "{{value}} سوالات",
+    "empty": "اس زمرے میں ابھی کوئی سوالات دستیاب نہیں",
     "signs": {
       "title": "ٹریفک اشارے اور علامات",
       "subtitle": "اشاروں اور علامات کو سیکھیں"

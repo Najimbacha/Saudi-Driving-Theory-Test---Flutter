@@ -1403,6 +1403,7 @@
     "filterInProgress": "চলমান",
     "filterCompleted": "সম্পন্ন",
     "totalQuestions": "{{value}} প্রশ্ন",
+    "empty": "এই বিভাগে এখনও কোনো প্রশ্ন নেই",
     "signs": {
       "title": "ট্রাফিক সাইন ও সংকেত",
       "subtitle": "সাইন ও সংকেত শিখুন"

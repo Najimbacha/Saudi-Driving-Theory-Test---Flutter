@@ -21,12 +21,15 @@ class PracticeFlowScreen extends ConsumerStatefulWidget {
 
 class _PracticeFlowScreenState extends ConsumerState<PracticeFlowScreen> {
   bool _handledCompletion = false;
+  bool _initialCategoryHandled = false;
 
   @override
   Widget build(BuildContext context) {
     final questionsAsync = ref.watch(questionsProvider);
     final quiz = ref.watch(quizProvider);
     final quizController = ref.read(quizProvider.notifier);
+    final categoryParam =
+        GoRouterState.of(context).uri.queryParameters['category'];
 
     return questionsAsync.when(
       loading: () => const Scaffold(
@@ -41,6 +44,23 @@ class _PracticeFlowScreenState extends ConsumerState<PracticeFlowScreen> {
           _handledCompletion = false;
         }
         if (quiz.questions.isEmpty) {
+          if (categoryParam != null && !_initialCategoryHandled) {
+            _initialCategoryHandled = true;
+            final filtered = _filterByCategory(questions, categoryParam);
+            if (filtered.isEmpty) {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('categories.empty'.tr()),
+                    backgroundColor: AppColors.secondary,
+                  ),
+                );
+              });
+            } else {
+              quizController.start(filtered);
+              return const SizedBox.shrink();
+            }
+          }
           return _PracticeSelector(
             onStart: (categoryId) {
               final filtered = _filterByCategory(questions, categoryId);
@@ -59,8 +79,11 @@ class _PracticeFlowScreenState extends ConsumerState<PracticeFlowScreen> {
           return const SizedBox.shrink();
         }
         final current = quiz.currentQuestion;
+        final locale = context.locale.languageCode;
         final selected = quiz.selectedAnswers[current.id];
         final isCorrect = selected != null && selected == current.correctIndex;
+        final questionText = _questionText(current, locale);
+        final options = _options(current, locale);
         return Scaffold(
           appBar: AppBar(
             title: Text('quiz.title'.tr()),
@@ -94,41 +117,51 @@ class _PracticeFlowScreenState extends ConsumerState<PracticeFlowScreen> {
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
                 const SizedBox(height: 12),
-                Text(
-                  current.questionKey.tr(),
-                  style: Theme.of(context).textTheme.titleMedium,
+                AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 250),
+                  child: Text(
+                    questionText,
+                    key: ValueKey(current.id),
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
                 ),
                 const SizedBox(height: 16),
-                ...List.generate(current.optionsKeys.length, (idx) {
-                  final optionKey = current.optionsKeys[idx];
-                  final wasSelected = selected == idx;
-                  Color? borderColor;
-                  Color? fill;
-                  if (quiz.showAnswer) {
-                    if (idx == current.correctIndex) {
-                      fill = AppColors.success.withOpacity(0.15);
-                      borderColor = AppColors.success;
-                    } else if (wasSelected) {
-                      fill = AppColors.error.withOpacity(0.12);
-                      borderColor = AppColors.error;
-                    }
-                  }
-                  return Container(
-                    margin: const EdgeInsets.only(bottom: 10),
-                    decoration: BoxDecoration(
-                      border:
-                          Border.all(color: borderColor ?? Colors.transparent),
-                      borderRadius: BorderRadius.circular(14),
-                      color: fill ?? Theme.of(context).cardColor,
-                    ),
-                    child: ListTile(
-                      title: Text(optionKey.tr()),
-                      onTap: quiz.showAnswer
-                          ? null
-                          : () => quizController.selectAnswer(idx),
-                    ),
-                  );
-                }),
+                AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 250),
+                  child: Column(
+                    key: ValueKey('${current.id}-options'),
+                    children: List.generate(options.length, (idx) {
+                      final optionText = options[idx];
+                      final wasSelected = selected == idx;
+                      Color? borderColor;
+                      Color? fill;
+                      if (quiz.showAnswer) {
+                        if (idx == current.correctIndex) {
+                          fill = AppColors.success.withOpacity(0.15);
+                          borderColor = AppColors.success;
+                        } else if (wasSelected) {
+                          fill = AppColors.error.withOpacity(0.12);
+                          borderColor = AppColors.error;
+                        }
+                      }
+                      return Container(
+                        margin: const EdgeInsets.only(bottom: 10),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                              color: borderColor ?? Colors.transparent),
+                          borderRadius: BorderRadius.circular(14),
+                          color: fill ?? Theme.of(context).cardColor,
+                        ),
+                        child: ListTile(
+                          title: Text(optionText),
+                          onTap: quiz.showAnswer
+                              ? null
+                              : () => quizController.selectAnswer(idx),
+                        ),
+                      );
+                    }),
+                  ),
+                ),
                 if (quiz.showAnswer) ...[
                   const SizedBox(height: 12),
                   Text(
@@ -140,8 +173,7 @@ class _PracticeFlowScreenState extends ConsumerState<PracticeFlowScreen> {
                   ),
                   const SizedBox(height: 6),
                   Text(
-                    current.explanationKey?.tr() ??
-                        'quiz.explanationFallback'.tr(),
+                    _explanation(current, locale),
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                 ],
@@ -216,7 +248,7 @@ class _PracticeFlowScreenState extends ConsumerState<PracticeFlowScreen> {
     final scores = <String, int>{};
     for (final entry in quiz.selectedAnswers.entries) {
       final question = quiz.questions.firstWhere((q) => q.id == entry.key);
-      final category = _categoryId(question.categoryKey);
+      final category = question.categoryId;
       if (entry.value == question.correctIndex) {
         scores[category] = (scores[category] ?? 0) + 1;
       }
@@ -227,15 +259,36 @@ class _PracticeFlowScreenState extends ConsumerState<PracticeFlowScreen> {
   static List<Question> _filterByCategory(
       List<Question> questions, String categoryId) {
     if (categoryId == 'all') return questions;
-    return questions
-        .where((q) => _categoryId(q.categoryKey) == categoryId)
-        .toList();
+    return questions.where((q) => q.categoryId == categoryId).toList();
   }
+}
 
-  static String _categoryId(String categoryKey) {
-    final parts = categoryKey.split('.');
-    return parts.isNotEmpty ? parts.last : categoryKey;
+String _questionText(Question question, String locale) {
+  if (locale == 'ar' && question.questionTextAr != null) {
+    return question.questionTextAr!;
   }
+  if (question.questionText != null) return question.questionText!;
+  return question.questionKey.tr();
+}
+
+List<String> _options(Question question, String locale) {
+  if (locale == 'ar' &&
+      question.optionsAr != null &&
+      question.optionsAr!.isNotEmpty) {
+    return question.optionsAr!;
+  }
+  if (question.options != null && question.options!.isNotEmpty) {
+    return question.options!;
+  }
+  return question.optionsKeys.map((key) => key.tr()).toList();
+}
+
+String _explanation(Question question, String locale) {
+  if (locale == 'ar' && question.explanationAr != null) {
+    return question.explanationAr!;
+  }
+  if (question.explanation != null) return question.explanation!;
+  return question.explanationKey?.tr() ?? 'quiz.explanationFallback'.tr();
 }
 
 class _PracticeSelector extends ConsumerWidget {

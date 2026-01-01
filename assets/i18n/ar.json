@@ -1419,6 +1419,7 @@
     "filterInProgress": "قيد التقدم",
     "filterCompleted": "مكتمل",
     "totalQuestions": "{{value}} سؤال",
+    "empty": "لا توجد أسئلة متاحة في هذه الفئة بعد",
     "signs": {
       "title": "إشارات المرور والعلامات",
       "subtitle": "تعلّم الإشارات والرموز"

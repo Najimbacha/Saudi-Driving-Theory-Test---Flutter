@@ -1403,6 +1403,7 @@
     "filterInProgress": "जारी",
     "filterCompleted": "पूर्ण",
     "totalQuestions": "{{value}} प्रश्न",
+    "empty": "इस श्रेणी में अभी कोई प्रश्न उपलब्ध नहीं हैं",
     "signs": {
       "title": "ट्रैफिक संकेत और चिन्ह",
       "subtitle": "संकेत और चिन्ह सीखें"

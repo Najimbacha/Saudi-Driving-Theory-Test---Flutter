@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../core/constants/app_colors.dart';
 import '../../providers/category_provider.dart';
@@ -93,6 +94,7 @@ class _CategoriesScreenState extends ConsumerState<CategoriesScreen> {
                 color: _parseColor(category.colorHex),
                 icon: _iconFor(category.iconName),
                 total: category.totalQuestions,
+                onTap: () => context.go('/practice?category=${category.id}'),
               );
             },
           ),
@@ -167,6 +169,7 @@ class _CategoryCard extends StatelessWidget {
     required this.color,
     required this.icon,
     required this.total,
+    required this.onTap,
   });
 
   final String title;
@@ -174,44 +177,49 @@ class _CategoryCard extends StatelessWidget {
   final Color color;
   final IconData icon;
   final int total;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(14),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              width: 42,
-              height: 42,
-              decoration: BoxDecoration(
-                color: color.withOpacity(0.16),
-                borderRadius: BorderRadius.circular(12),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(16),
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.all(14),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: 42,
+                height: 42,
+                decoration: BoxDecoration(
+                  color: color.withOpacity(0.16),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Icon(icon, color: color),
               ),
-              child: Icon(icon, color: color),
-            ),
-            const Spacer(),
-            Text(
-              title,
-              style: Theme.of(context).textTheme.titleMedium,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
-            const SizedBox(height: 4),
-            Text(
-              subtitle,
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.textSecondary),
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
-            const SizedBox(height: 10),
-            Text(
-              'categories.totalQuestions'.tr(args: [total.toString()]),
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.textSecondary),
-            ),
-          ],
+              const Spacer(),
+              Text(
+                title,
+                style: Theme.of(context).textTheme.titleMedium,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+              const SizedBox(height: 4),
+              Text(
+                subtitle,
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.textSecondary),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+              const SizedBox(height: 10),
+              Text(
+                'categories.totalQuestions'.tr(args: [total.toString()]),
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.textSecondary),
+              ),
+            ],
+          ),
         ),
       ),
     );
