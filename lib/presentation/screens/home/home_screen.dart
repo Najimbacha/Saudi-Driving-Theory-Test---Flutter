@@ -27,14 +27,14 @@ class HomeDashboardScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Explore'),
+        title: Text('home.explore'.tr()),
         actions: [
           IconButton(
             icon: const Icon(Icons.person_outline_rounded),
             onPressed: () {
               // Profile/settings action
             },
-            tooltip: 'Profile',
+            tooltip: 'home.profile'.tr(),
           ),
         ],
       ),
@@ -66,7 +66,7 @@ class HomeDashboardScreen extends ConsumerWidget {
               padding: const EdgeInsets.fromLTRB(20, 24, 20, 8),
               sliver: SliverToBoxAdapter(
                 child: Text(
-                  'Quick Start',
+                  'home.quickStart'.tr(),
                   style: theme.textTheme.headlineSmall?.copyWith(
                     fontWeight: FontWeight.w800,
                     color: scheme.onSurface,
@@ -104,7 +104,7 @@ class HomeDashboardScreen extends ConsumerWidget {
               padding: const EdgeInsets.fromLTRB(20, 32, 20, 8),
               sliver: SliverToBoxAdapter(
                 child: Text(
-                  'Learning Paths',
+                  'home.learningPaths'.tr(),
                   style: theme.textTheme.headlineSmall?.copyWith(
                     fontWeight: FontWeight.w800,
                     color: scheme.onSurface,
@@ -284,7 +284,7 @@ class _StatsRow extends StatelessWidget {
           child: _StatCard(
             icon: Icons.my_library_books_rounded,
             value: totalAnswered.toString(),
-            label: 'Questions',
+            label: 'home.statLabels.questions'.tr(),
             iconColor: AppColors.primary,
           ),
         ),
@@ -293,7 +293,7 @@ class _StatsRow extends StatelessWidget {
           child: _StatCard(
             icon: Icons.trending_up_rounded,
             value: '$accuracy%',
-            label: 'Accuracy',
+            label: 'home.statLabels.accuracy'.tr(),
             iconColor: AppColors.success,
           ),
         ),
@@ -302,7 +302,7 @@ class _StatsRow extends StatelessWidget {
           child: _StatCard(
             icon: Icons.local_fire_department_rounded,
             value: streak.toString(),
-            label: 'Day Streak',
+            label: 'home.statLabels.dayStreak'.tr(),
             iconColor: AppColors.accent,
           ),
         ),
@@ -392,7 +392,7 @@ class _QuickActionsRow extends StatelessWidget {
             Expanded(
               child: _QuickActionButton(
                 title: 'home.practice'.tr(),
-                subtitle: 'Start practicing now',
+                subtitle: 'home.practiceSubtitle'.tr(),
                 icon: Icons.play_arrow_rounded,
                 gradient: AppColors.primaryGradient,
                 onTap: onPractice,
@@ -402,7 +402,7 @@ class _QuickActionsRow extends StatelessWidget {
             Expanded(
               child: _QuickActionButton(
                 title: 'home.mockExam'.tr(),
-                subtitle: 'Test your knowledge',
+                subtitle: 'home.mockExamSubtitle'.tr(),
                 icon: Icons.description_rounded,
                 gradient: AppColors.secondaryGradient,
                 onTap: onExam,

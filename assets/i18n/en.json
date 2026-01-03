@@ -52,16 +52,27 @@
       "startCta": "Start Learning",
       "progressLabel": "Progress: {value}%"
     },
+    "explore": "Explore",
     "greeting": "Ready to Learn?",
     "subtitle": "Practice anytime, anywhere - no internet needed",
+    "profile": "Profile",
     "learnSigns": "Traffic Signs",
     "learnSignsDesc": "Learn all traffic signs",
     "learnRules": "Rules & Regulations",
     "learnRulesDesc": "Road rules and safety",
     "practice": "Quick Practice",
     "practiceDesc": "Test your knowledge",
+    "practiceSubtitle": "Start practicing now",
     "mockExam": "Mock Exam",
     "mockExamDesc": "Full theory practice",
+    "mockExamSubtitle": "Test your knowledge",
+    "quickStart": "Quick Start",
+    "learningPaths": "Learning Paths",
+    "statLabels": {
+      "questions": "Questions",
+      "accuracy": "Accuracy",
+      "dayStreak": "Day Streak"
+    },
     "practiceByCategory": "Practice by Category",
     "practiceByCategoryDesc": "Learn topic by topic",
     "favorites": "Favorites",
@@ -1155,6 +1166,13 @@
   "settings": {
     "title": "Settings",
     "language": "Language",
+    "languages": {
+      "en": "English",
+      "ar": "العربية",
+      "ur": "اردو",
+      "hi": "हिन्दी",
+      "bn": "বাংলা"
+    },
     "theme": "Theme",
     "feedback": "Feedback",
     "soundDesc": "Play sounds for correct/incorrect answers",

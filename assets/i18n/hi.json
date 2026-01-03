@@ -52,6 +52,7 @@
       "startCta": "सीखना शुरू करें",
       "progressLabel": "प्रगति: {value}%"
     },
+    "explore": "अन्वेषण करें",
     "greeting": "सीखने के लिए तैयार?",
     "subtitle": "कभी भी, कहीं भी अभ्यास करें — इंटरनेट की जरूरत नहीं",
     "learnSigns": "ट्रैफ़िक साइन",
@@ -60,8 +61,17 @@
     "learnRulesDesc": "सड़क नियम और सुरक्षा",
     "practice": "अभ्यास",
     "practiceDesc": "अपना ज्ञान परखें",
+    "practiceSubtitle": "अभी अभ्यास शुरू करें",
     "mockExam": "मॉक परीक्षा",
     "mockExamDesc": "पूरा थ्योरी अभ्यास",
+    "mockExamSubtitle": "अपना ज्ञान परखें",
+    "quickStart": "त्वरित प्रारंभ",
+    "learningPaths": "सीखने के पथ",
+    "statLabels": {
+      "questions": "प्रश्न",
+      "accuracy": "सटीकता",
+      "dayStreak": "दैनिक स्ट्रीक"
+    },
     "practiceByCategory": "श्रेणी के अनुसार अभ्यास",
     "practiceByCategoryDesc": "विषयवार सीखें",
     "favorites": "पसंदीदा",
@@ -1136,6 +1146,13 @@
   "settings": {
     "title": "सेटिंग्स",
     "language": "भाषा",
+    "languages": {
+      "en": "English",
+      "ar": "العربية",
+      "ur": "اردو",
+      "hi": "हिन्दी",
+      "bn": "বাংলা"
+    },
     "theme": "थीम",
     "feedback": "फ़ीडबैक",
     "soundDesc": "सही/गलत उत्तरों पर ध्वनि चलाएँ",

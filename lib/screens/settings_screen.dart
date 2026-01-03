@@ -9,33 +9,52 @@ import '../widgets/banner_ad_widget.dart';
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
 
+  static String _getThemeName(BuildContext context, ThemeMode mode) {
+    switch (mode) {
+      case ThemeMode.light:
+        return 'settings.themes.light'.tr();
+      case ThemeMode.dark:
+        return 'settings.themes.dark'.tr();
+      case ThemeMode.system:
+        return 'settings.themes.system'.tr();
+    }
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final settings = ref.watch(appSettingsProvider);
     final notifier = ref.read(appSettingsProvider.notifier);
+    
     return Scaffold(
       appBar: AppBar(title: Text('settings.title'.tr())),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
+          // DEBUG: Show current locale for verification
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Text(
+              'Locale: ${context.locale.languageCode}',
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                color: Theme.of(context).colorScheme.primary,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
           ListTile(
             title: Text('settings.language'.tr()),
-            subtitle: Text(settings.languageCode),
-            onTap: () async {
-              final code = await showModalBottomSheet<String>(
+            subtitle: Text('settings.languages.${settings.languageCode}'.tr()),
+            onTap: () {
+              showModalBottomSheet<String>(
                 context: context,
                 builder: (context) => _LanguageSheet(current: settings.languageCode),
               );
-              if (!context.mounted) return;
-              if (code != null) {
-                notifier.setLanguage(code);
-                context.setLocale(Locale(code));
-              }
+              // Language change is handled inside _LanguageSheet for instant update
             },
           ),
           ListTile(
             title: Text('settings.theme'.tr()),
-            subtitle: Text(settings.themeMode.name),
+            subtitle: Text(_getThemeName(context, settings.themeMode)),
             onTap: () async {
               final mode = await showModalBottomSheet<ThemeMode>(
                 context: context,
@@ -76,22 +95,38 @@ class SettingsScreen extends ConsumerWidget {
   }
 }
 
-class _LanguageSheet extends StatelessWidget {
+class _LanguageSheet extends ConsumerWidget {
   const _LanguageSheet({required this.current});
 
   final String current;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     const codes = ['en', 'ar', 'ur', 'hi', 'bn'];
+    final notifier = ref.read(appSettingsProvider.notifier);
+    
     return SafeArea(
       child: ListView(
         children: codes
             .map(
               (code) => ListTile(
-                title: Text(code),
+                title: Text('settings.languages.$code'.tr()),
                 trailing: current == code ? const Icon(Icons.check) : null,
-                onTap: () => Navigator.pop(context, code),
+                onTap: () async {
+                  // Update EasyLocalization runtime locale - this updates context.locale immediately
+                  // MaterialApp uses context.locale, so it will rebuild with new locale
+                  // EasyLocalization handles persistence via saveLocale: true
+                  await context.setLocale(Locale(code));
+                  
+                  // Update Riverpod state to sync with EasyLocalization
+                  // This triggers AppRoot rebuild via ref.watch(appSettingsProvider)
+                  notifier.setLanguage(code);
+                  
+                  // Close bottom sheet
+                  if (context.mounted) {
+                    Navigator.pop(context, code);
+                  }
+                },
               ),
             )
             .toList(),
@@ -105,21 +140,28 @@ class _ThemeSheet extends StatelessWidget {
 
   final ThemeMode current;
 
+  String _getThemeName(BuildContext context, ThemeMode mode) {
+    switch (mode) {
+      case ThemeMode.light:
+        return 'settings.themes.light'.tr();
+      case ThemeMode.dark:
+        return 'settings.themes.dark'.tr();
+      case ThemeMode.system:
+        return 'settings.themes.system'.tr();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    const modes = {
-      ThemeMode.light: 'Light',
-      ThemeMode.dark: 'Dark',
-      ThemeMode.system: 'System',
-    };
+    const modes = [ThemeMode.light, ThemeMode.dark, ThemeMode.system];
     return SafeArea(
       child: ListView(
-        children: modes.entries
+        children: modes
             .map(
-              (entry) => ListTile(
-                title: Text(entry.value),
-                trailing: current == entry.key ? const Icon(Icons.check) : null,
-                onTap: () => Navigator.pop(context, entry.key),
+              (mode) => ListTile(
+                title: Text(_getThemeName(context, mode)),
+                trailing: current == mode ? const Icon(Icons.check) : null,
+                onTap: () => Navigator.pop(context, mode),
               ),
             )
             .toList(),

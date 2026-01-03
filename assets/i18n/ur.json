@@ -52,6 +52,7 @@
       "startCta": "سیکھنا شروع کریں",
       "progressLabel": "پیش رفت: {value}٪"
     },
+    "explore": "تلاش کریں",
     "greeting": "آج کیا سیکھنا ہے؟",
     "subtitle": "کچھ منٹ مشق کریں، ہر دن بہتر ہوں",
     "learnSigns": "ٹریفک نشانیاں",
@@ -59,9 +60,18 @@
     "learnRules": "قواعد و ضوابط",
     "learnRulesDesc": "بنیادی قواعد سیکھیں",
     "practice": "پریکٹس",
-    "practiceDesc": "مختصر سوالات کی مشق",
+    "practiceDesc": "اپنا علم پرکھیں",
+    "practiceSubtitle": "ابھی مشق شروع کریں",
     "mockExam": "نمونہ امتحان",
-    "mockExamDesc": "اصل انداز کی مشق",
+    "mockExamDesc": "مکمل نظریاتی مشق",
+    "mockExamSubtitle": "اپنا علم پرکھیں",
+    "quickStart": "فوری آغاز",
+    "learningPaths": "سیکھنے کے راستے",
+    "statLabels": {
+      "questions": "سوالات",
+      "accuracy": "درستگی",
+      "dayStreak": "یومیہ سلسلہ"
+    },
     "practiceByCategory": "زمرہ وار مشق",
     "practiceByCategoryDesc": "موضوع بہ موضوع سیکھیں",
     "favorites": "پسندیدہ",
@@ -1136,6 +1146,13 @@
   "settings": {
     "title": "ترتیبات",
     "language": "زبان",
+    "languages": {
+      "en": "English",
+      "ar": "العربية",
+      "ur": "اردو",
+      "hi": "हिन्दी",
+      "bn": "বাংলা"
+    },
     "theme": "تھیم",
     "feedback": "فیڈبیک",
     "soundDesc": "صحیح/غلط جواب پر آواز چلائیں",

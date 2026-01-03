@@ -267,28 +267,74 @@ class _ReviewCard extends StatelessWidget {
 }
 
 String _questionText(Question question, String locale) {
-  if (locale == 'ar' && question.questionTextAr != null) {
-    return question.questionTextAr!;
+  // Try current locale embedded text first
+  switch (locale) {
+    case 'ar':
+      if (question.questionTextAr != null) return question.questionTextAr!;
+      break;
+    case 'ur':
+      if (question.questionTextUr != null) return question.questionTextUr!;
+      break;
+    case 'hi':
+      if (question.questionTextHi != null) return question.questionTextHi!;
+      break;
+    case 'bn':
+      if (question.questionTextBn != null) return question.questionTextBn!;
+      break;
   }
+  // Fallback to English embedded text
   if (question.questionText != null) return question.questionText!;
+  // Final fallback to translation key
   return question.questionKey.tr();
 }
 
 List<String> _options(Question question, String locale) {
-  if (locale == 'ar' && question.optionsAr != null && question.optionsAr!.isNotEmpty) {
-    return question.optionsAr!;
+  // Try current locale embedded options first
+  List<String>? localeOptions;
+  switch (locale) {
+    case 'ar':
+      localeOptions = question.optionsAr;
+      break;
+    case 'ur':
+      localeOptions = question.optionsUr;
+      break;
+    case 'hi':
+      localeOptions = question.optionsHi;
+      break;
+    case 'bn':
+      localeOptions = question.optionsBn;
+      break;
   }
+  if (localeOptions != null && localeOptions.isNotEmpty) {
+    return localeOptions;
+  }
+  // Fallback to English embedded options
   if (question.options != null && question.options!.isNotEmpty) {
     return question.options!;
   }
+  // Final fallback to translation keys
   return question.optionsKeys.map((key) => key.tr()).toList();
 }
 
 String _explanation(Question question, String locale) {
-  if (locale == 'ar' && question.explanationAr != null) {
-    return question.explanationAr!;
+  // Try current locale embedded explanation first
+  switch (locale) {
+    case 'ar':
+      if (question.explanationAr != null) return question.explanationAr!;
+      break;
+    case 'ur':
+      if (question.explanationUr != null) return question.explanationUr!;
+      break;
+    case 'hi':
+      if (question.explanationHi != null) return question.explanationHi!;
+      break;
+    case 'bn':
+      if (question.explanationBn != null) return question.explanationBn!;
+      break;
   }
+  // Fallback to English embedded explanation
   if (question.explanation != null) return question.explanation!;
+  // Final fallback to translation key
   return question.explanationKey?.tr() ?? 'quiz.explanationFallback'.tr();
 }
 

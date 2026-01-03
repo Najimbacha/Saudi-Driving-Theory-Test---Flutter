@@ -9,8 +9,14 @@ import 'state/app_state.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await EasyLocalization.ensureInitialized();
+
+  // Get SharedPreferences for Riverpod state management
+  // EasyLocalization handles locale persistence via saveLocale: true
+  // We read prefs here for other app settings, not for locale
   final prefs = await SharedPreferences.getInstance();
+
   final adsEnabled = prefs.getBool('adsEnabled') ?? false;
   if (adsEnabled) {
     await AdService.instance.init();
@@ -31,7 +37,10 @@ void main() async {
         ],
         path: 'assets/i18n',
         fallbackLocale: const Locale('en'),
+        // EasyLocalization automatically loads saved locale when saveLocale: true
+        // If no saved locale exists, it uses fallbackLocale
         useOnlyLangCode: true,
+        saveLocale: true,
         child: const AppRoot(),
       ),
     ),

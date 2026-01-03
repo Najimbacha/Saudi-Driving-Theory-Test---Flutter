@@ -52,6 +52,7 @@
       "startCta": "শুরু করুন",
       "progressLabel": "অগ্রগতি: {value}%"
     },
+    "explore": "অন্বেষণ করুন",
     "greeting": "শিখতে প্রস্তুত?",
     "subtitle": "যেকোনো সময়, যেকোনো জায়গায় অনুশীলন করুন — ইন্টারনেট দরকার নেই",
     "learnSigns": "ট্রাফিক সাইন",
@@ -60,8 +61,17 @@
     "learnRulesDesc": "সড়ক নিয়ম ও নিরাপত্তা",
     "practice": "প্র্যাকটিস",
     "practiceDesc": "আপনার জ্ঞান যাচাই করুন",
+    "practiceSubtitle": "এখনই অনুশীলন শুরু করুন",
     "mockExam": "মক পরীক্ষা",
     "mockExamDesc": "পূর্ণ থিওরি অনুশীলন",
+    "mockExamSubtitle": "আপনার জ্ঞান যাচাই করুন",
+    "quickStart": "দ্রুত শুরু",
+    "learningPaths": "শেখার পথ",
+    "statLabels": {
+      "questions": "প্রশ্ন",
+      "accuracy": "নির্ভুলতা",
+      "dayStreak": "দৈনিক স্ট্রিক"
+    },
     "practiceByCategory": "বিভাগভিত্তিক অনুশীলন",
     "practiceByCategoryDesc": "বিষয় ধরে শিখুন",
     "favorites": "প্রিয়",
@@ -1136,6 +1146,13 @@
   "settings": {
     "title": "সেটিংস",
     "language": "ভাষা",
+    "languages": {
+      "en": "English",
+      "ar": "العربية",
+      "ur": "اردو",
+      "hi": "हिन्दी",
+      "bn": "বাংলা"
+    },
     "theme": "থিম",
     "themes": {
       "light": "লাইট",

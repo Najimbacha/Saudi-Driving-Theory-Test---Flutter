@@ -300,22 +300,52 @@ List<Question> _randomSubset(List<Question> questions, int count) {
 }
 
 String _questionText(Question question, String locale) {
-  if (locale == 'ar' && question.questionTextAr != null) {
-    return question.questionTextAr!;
+  // Try current locale embedded text first
+  switch (locale) {
+    case 'ar':
+      if (question.questionTextAr != null) return question.questionTextAr!;
+      break;
+    case 'ur':
+      if (question.questionTextUr != null) return question.questionTextUr!;
+      break;
+    case 'hi':
+      if (question.questionTextHi != null) return question.questionTextHi!;
+      break;
+    case 'bn':
+      if (question.questionTextBn != null) return question.questionTextBn!;
+      break;
   }
+  // Fallback to English embedded text
   if (question.questionText != null) return question.questionText!;
+  // Final fallback to translation key
   return question.questionKey.tr();
 }
 
 List<String> _options(Question question, String locale) {
-  if (locale == 'ar' &&
-      question.optionsAr != null &&
-      question.optionsAr!.isNotEmpty) {
-    return question.optionsAr!;
+  // Try current locale embedded options first
+  List<String>? localeOptions;
+  switch (locale) {
+    case 'ar':
+      localeOptions = question.optionsAr;
+      break;
+    case 'ur':
+      localeOptions = question.optionsUr;
+      break;
+    case 'hi':
+      localeOptions = question.optionsHi;
+      break;
+    case 'bn':
+      localeOptions = question.optionsBn;
+      break;
   }
+  if (localeOptions != null && localeOptions.isNotEmpty) {
+    return localeOptions;
+  }
+  // Fallback to English embedded options
   if (question.options != null && question.options!.isNotEmpty) {
     return question.options!;
   }
+  // Final fallback to translation keys
   return question.optionsKeys.map((key) => key.tr()).toList();
 }
 

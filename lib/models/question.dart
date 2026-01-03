@@ -11,10 +11,19 @@ class Question {
     required this.signId,
     this.questionText,
     this.questionTextAr,
+    this.questionTextUr,
+    this.questionTextHi,
+    this.questionTextBn,
     this.options,
     this.optionsAr,
+    this.optionsUr,
+    this.optionsHi,
+    this.optionsBn,
     this.explanation,
     this.explanationAr,
+    this.explanationUr,
+    this.explanationHi,
+    this.explanationBn,
     this.imageUrl,
   });
 
@@ -29,10 +38,19 @@ class Question {
   final String? signId;
   final String? questionText;
   final String? questionTextAr;
+  final String? questionTextUr;
+  final String? questionTextHi;
+  final String? questionTextBn;
   final List<String>? options;
   final List<String>? optionsAr;
+  final List<String>? optionsUr;
+  final List<String>? optionsHi;
+  final List<String>? optionsBn;
   final String? explanation;
   final String? explanationAr;
+  final String? explanationUr;
+  final String? explanationHi;
+  final String? explanationBn;
   final String? imageUrl;
 
   static String _categoryFromKey(String key) {
@@ -64,14 +82,29 @@ class Question {
       signId: json['signId'] as String?,
       questionText: questionMap?['en'] as String?,
       questionTextAr: questionMap?['ar'] as String?,
+      questionTextUr: questionMap?['ur'] as String?,
+      questionTextHi: questionMap?['hi'] as String?,
+      questionTextBn: questionMap?['bn'] as String?,
       options: optionsList
           ?.map((option) => (option as Map<String, dynamic>)['en'] as String? ?? '')
           .toList(),
       optionsAr: optionsList
           ?.map((option) => (option as Map<String, dynamic>)['ar'] as String? ?? '')
           .toList(),
+      optionsUr: optionsList
+          ?.map((option) => (option as Map<String, dynamic>)['ur'] as String? ?? '')
+          .toList(),
+      optionsHi: optionsList
+          ?.map((option) => (option as Map<String, dynamic>)['hi'] as String? ?? '')
+          .toList(),
+      optionsBn: optionsList
+          ?.map((option) => (option as Map<String, dynamic>)['bn'] as String? ?? '')
+          .toList(),
       explanation: explanationMap?['en'] as String?,
       explanationAr: explanationMap?['ar'] as String?,
+      explanationUr: explanationMap?['ur'] as String?,
+      explanationHi: explanationMap?['hi'] as String?,
+      explanationBn: explanationMap?['bn'] as String?,
       imageUrl: json['imageUrl'] as String?,
     );
   }

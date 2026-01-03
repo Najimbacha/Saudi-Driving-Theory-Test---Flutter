@@ -1,8 +1,8 @@
 {
   "app": {
     "name": "اختبار نظرية القيادة السعودية",
-    "tagline": "Master driving theory with confidence",
-    "offline": "Works 100% Offline"
+    "tagline": "أتقن نظرية القيادة بثقة",
+    "offline": "يعمل بدون إنترنت 100%"
   },
   "nav": {
     "home": "الرئيسية",
@@ -16,12 +16,12 @@
     "achievements": "الإنجازات"
   },
   "onboarding": {
-    "welcome": "Welcome",
-    "selectLanguage": "Select Your Language",
-    "languageNote": "You can change this anytime in settings",
-    "getStarted": "Get Started",
-    "offlineReady": "Ready to learn offline!",
-    "offlineDesc": "All content works without internet connection"
+    "welcome": "مرحباً",
+    "selectLanguage": "اختر لغتك",
+    "languageNote": "يمكنك تغيير هذا في أي وقت من الإعدادات",
+    "getStarted": "ابدأ",
+    "offlineReady": "جاهز للتعلم بدون إنترنت!",
+    "offlineDesc": "جميع المحتويات تعمل بدون اتصال بالإنترنت"
   },
   "home": {
     "badges": {
@@ -52,22 +52,33 @@
       "startCta": "ابدأ التعلم",
       "progressLabel": "التقدم: {value}٪"
     },
-    "greeting": "Ready to Learn?",
-    "subtitle": "Practice anytime, anywhere - no internet needed",
-    "learnSigns": "Traffic Signs",
-    "learnSignsDesc": "Learn all traffic signs",
-    "learnRules": "Rules & Regulations",
-    "learnRulesDesc": "Road rules and safety",
+    "explore": "استكشف",
+    "greeting": "هل أنت مستعد للتعلم؟",
+    "subtitle": "تمرّن في أي وقت وأي مكان - لا حاجة للإنترنت",
+    "profile": "الملف الشخصي",
+    "learnSigns": "إشارات المرور",
+    "learnSignsDesc": "تعلم جميع إشارات المرور",
+    "learnRules": "القواعد واللوائح",
+    "learnRulesDesc": "قواعد الطريق والسلامة",
     "practice": "تدريب",
-    "practiceDesc": "Test your knowledge",
+    "practiceDesc": "اختبر معرفتك",
+    "practiceSubtitle": "ابدأ الممارسة الآن",
     "mockExam": "اختبار تجريبي",
-    "mockExamDesc": "Full theory practice",
+    "mockExamDesc": "تدريب نظري كامل",
+    "mockExamSubtitle": "اختبر معرفتك",
+    "quickStart": "بدء سريع",
+    "learningPaths": "مسارات التعلم",
+    "statLabels": {
+      "questions": "الأسئلة",
+      "accuracy": "الدقة",
+      "dayStreak": "السلسلة اليومية"
+    },
     "practiceByCategory": "التدرب حسب الفئة",
     "practiceByCategoryDesc": "تعلم موضوعاً تلو الآخر",
     "favorites": "المفضلة",
-    "favoritesDesc": "Your saved items",
+    "favoritesDesc": "العناصر المحفوظة",
     "stats": "تقدمك",
-    "statsDesc": "Track your learning",
+    "statsDesc": "تتبع تعلّمك",
     "history": "سجل الاختبارات",
     "historyDesc": "راجع نتائجك السابقة",
     "violationPoints": "نقاط المخالفات المرورية",
@@ -152,7 +163,7 @@
   },
   "signs": {
     "title": "إشارات المرور",
-    "search": "Search signs...",
+    "search": "ابحث عن الإشارات...",
     "categories": {
       "all": "جميع الإشارات",
       "warning": "تحذيرية",
@@ -177,10 +188,10 @@
     "related": "إشارات ذات صلة"
   },
   "quiz": {
-    "title": "Practice Quiz",
-    "selectCategory": "Select Category",
-    "selectDifficulty": "Select Difficulty",
-    "selectQuestions": "Number of Questions",
+    "title": "اختبار تدريبي",
+    "selectCategory": "اختر الفئة",
+    "selectDifficulty": "اختر الصعوبة",
+    "selectQuestions": "عدد الأسئلة",
     "difficulty": {
       "easy": "سهل",
       "medium": "متوسط",
@@ -197,17 +208,17 @@
       "traffic_fines": "الغرامات المرورية (تدريب)",
       "unknown": "أخرى"
     },
-    "start": "Start Quiz",
-    "question": "Question",
-    "of": "??",
-    "next": "Next",
-    "submit": "Submit Answer",
-    "correct": "Correct!",
-    "incorrect": "Incorrect",
-    "explanation": "Explanation",
+    "start": "ابدأ الاختبار",
+    "question": "سؤال",
+    "of": "من",
+    "next": "التالي",
+    "submit": "إرسال الإجابة",
+    "correct": "صحيح!",
+    "incorrect": "خاطئ",
+    "explanation": "شرح",
     "explanationFallback": "لا يوجد شرح لهذا السؤال بعد.",
     "otherOptionsNote": "الخيارات الأخرى لا تطابق القاعدة المذكورة في السؤال.",
-    "timeLeft": "Time Left",
+    "timeLeft": "الوقت المتبقي",
     "q": {
       "q1": {
         "text": "ماذا تعني اللافتة الحمراء المثمنة؟",
@@ -1105,10 +1116,10 @@
       "markings": "علامات الطريق",
       "safety": "قواعد السلامة"
     },
-    "relatedSignsTitle": "Related Traffic Signs",
-    "viewRelatedSigns": "View all related signs",
-    "relatedViolationsTitle": "Common Violations & Points",
-    "viewViolationSystem": "View full point system"
+    "relatedSignsTitle": "إشارات المرور ذات الصلة",
+    "viewRelatedSigns": "عرض جميع الإشارات ذات الصلة",
+    "relatedViolationsTitle": "المخالفات والنقاط الشائعة",
+    "viewViolationSystem": "عرض نظام النقاط الكامل"
   },
   "favorites": {
     "title": "المفضلة",
@@ -1135,8 +1146,15 @@
   },
   "settings": {
     "title": "الإعدادات",
-    "language": "Language",
-    "theme": "Theme",
+    "language": "اللغة",
+    "languages": {
+      "en": "English",
+      "ar": "العربية",
+      "ur": "اردو",
+      "hi": "हिन्दी",
+      "bn": "বাংলা"
+    },
+    "theme": "المظهر",
     "feedback": "التغذية الراجعة",
     "soundDesc": "تشغيل الأصوات للإجابات الصحيحة والخاطئة",
     "vibrationDesc": "اهتزاز عند اختيار الإجابات",

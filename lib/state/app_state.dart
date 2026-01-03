@@ -181,6 +181,8 @@ class AppSettingsNotifier extends StateNotifier<AppSettingsState> {
   }
 
   void setLanguage(String code) {
+    // Update SharedPreferences for non-localization use (e.g., analytics, logging)
+    // EasyLocalization handles its own persistence via saveLocale: true
     _prefs.setString('language', code);
     state = state.copyWith(languageCode: code);
   }
